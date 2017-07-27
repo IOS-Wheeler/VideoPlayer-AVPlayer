@@ -1,8 +1,8 @@
 //
-//  SPViewController.swift
+//  SPViewController1.swift
 //  VideoPlayer-AVPlayer
 //
-//  Created by ayong on 2017/7/26.
+//  Created by ayong on 2017/7/27.
 //  Copyright © 2017年 IOS-Wheeler. All rights reserved.
 //
 
@@ -10,14 +10,14 @@ import UIKit
 import SnapKit
 import AVFoundation
 
-class SPViewController: UIViewController {
+class SPViewController1: UIViewController {
     
-    fileprivate lazy var player: SPPlayer = SPPlayer()
+    fileprivate lazy var player: SPPlayer1 = SPPlayer1()
     
     
     
     deinit {
-        print("SPViewController deinit")
+        print("SPViewController1 deinit")
     }
     
     override func viewDidLoad() {
@@ -48,12 +48,12 @@ class SPViewController: UIViewController {
     
 }
 
-extension SPViewController: UI {
+extension SPViewController1: UI {
     func adjustUI() {
         self.view.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = false
         
-        self.navigationItem.title = "No.3 完整版"
+        self.navigationItem.title = "No.1 添加播放器"
     }
     func addSubviews() {
         self.view.addSubview(player)

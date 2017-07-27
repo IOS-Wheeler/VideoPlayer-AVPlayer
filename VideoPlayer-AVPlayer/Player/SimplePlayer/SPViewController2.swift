@@ -1,8 +1,8 @@
 //
-//  SPViewController.swift
+//  SPViewController2.swift
 //  VideoPlayer-AVPlayer
 //
-//  Created by ayong on 2017/7/26.
+//  Created by ayong on 2017/7/27.
 //  Copyright © 2017年 IOS-Wheeler. All rights reserved.
 //
 
@@ -10,19 +10,19 @@ import UIKit
 import SnapKit
 import AVFoundation
 
-class SPViewController: UIViewController {
+class SPViewController2: UIViewController {
     
-    fileprivate lazy var player: SPPlayer = SPPlayer()
+    fileprivate lazy var player: SPPlayer2 = SPPlayer2()
     
     
     
     deinit {
-        print("SPViewController deinit")
+        print("SPViewController2 deinit")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.addSubviews()
         self.addConstraints()
         self.adjustUI()
@@ -35,25 +35,25 @@ class SPViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+
     /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
 }
 
-extension SPViewController: UI {
+extension SPViewController2: UI {
     func adjustUI() {
         self.view.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = false
         
-        self.navigationItem.title = "No.3 完整版"
+        self.navigationItem.title = "No.2 添加UI"
     }
     func addSubviews() {
         self.view.addSubview(player)
