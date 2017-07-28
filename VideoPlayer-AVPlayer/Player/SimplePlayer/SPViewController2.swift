@@ -48,7 +48,7 @@ class SPViewController2: UIViewController {
 
 }
 
-extension SPViewController2: UI {
+extension SPViewController2: UICodingStyle {
     func adjustUI() {
         self.view.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = false

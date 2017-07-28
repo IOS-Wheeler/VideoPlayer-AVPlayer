@@ -9,8 +9,8 @@
 import Foundation
 
 
-// MARK: - 定义协议方法
-protocol UI {
+// MARK: - 定义UICodingStyle协议,定义几个方法（UICodingStyle的设计只是为了让代码看起来更加美观，优雅）
+protocol UICodingStyle {
     /// 用于调整UI的接口
     func adjustUI()
     
@@ -29,7 +29,7 @@ protocol UI {
 
 
 // MARK: - 默认实现
-extension UI {
+extension UICodingStyle {
     /// 用于调整UI的接口
     func adjustUI(){}
     

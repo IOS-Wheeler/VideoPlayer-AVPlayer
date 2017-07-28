@@ -35,7 +35,7 @@ class AYViewController: UIViewController {
 
 }
 
-extension AYViewController: UI {
+extension AYViewController: UICodingStyle {
     func adjustUI() {
         
     }

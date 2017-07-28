@@ -21,9 +21,9 @@
 		8E27801A1F287DC900013E6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E2780181F287DC900013E6C /* Main.storyboard */; };
 		8E27801C1F287DC900013E6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E27801B1F287DC900013E6C /* Assets.xcassets */; };
 		8E27801F1F287DC900013E6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E27801D1F287DC900013E6C /* LaunchScreen.storyboard */; };
-		8E29CC831F2890D60026CC85 /* NetWorkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E29CC7D1F2890D60026CC85 /* NetWorkCheck.swift */; };
 		8E29CC851F2894090026CC85 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E29CC841F2894090026CC85 /* UIKit.framework */; };
 		8E29CC8B1F289B390026CC85 /* SPPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E29CC891F2896940026CC85 /* SPPlayer.swift */; };
+		8E58F3161F2B2F0D00FF2B0E /* SPPlayer-API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E58F3151F2B2F0D00FF2B0E /* SPPlayer-API.swift */; };
 		8E7872291F289B9D002710A8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7872281F289B9D002710A8 /* AVFoundation.framework */; };
 		8E78722B1F289BA4002710A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E78722A1F289BA4002710A8 /* Foundation.framework */; };
 		8E78722D1F289BFC002710A8 /* SPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E78722C1F289BFC002710A8 /* SPViewController.swift */; };
@@ -50,14 +50,9 @@
 		8E27801B1F287DC900013E6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E27801E1F287DC900013E6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E2780201F287DC900013E6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8E29CC781F2890D60026CC85 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		8E29CC791F2890D60026CC85 /* PlayerLikeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerLikeView.swift; sourceTree = "<group>"; };
-		8E29CC7A1F2890D60026CC85 /* Player-API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Player-API.swift"; sourceTree = "<group>"; };
-		8E29CC7B1F2890D60026CC85 /* PlayerTopNavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTopNavBar.swift; sourceTree = "<group>"; };
-		8E29CC7C1F2890D60026CC85 /* PlayerBottomBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerBottomBar.swift; sourceTree = "<group>"; };
-		8E29CC7D1F2890D60026CC85 /* NetWorkCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkCheck.swift; sourceTree = "<group>"; };
 		8E29CC841F2894090026CC85 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8E29CC891F2896940026CC85 /* SPPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPPlayer.swift; sourceTree = "<group>"; };
+		8E58F3151F2B2F0D00FF2B0E /* SPPlayer-API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SPPlayer-API.swift"; sourceTree = "<group>"; };
 		8E7872281F289B9D002710A8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8E78722A1F289BA4002710A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8E78722C1F289BFC002710A8 /* SPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPViewController.swift; sourceTree = "<group>"; };
@@ -118,27 +113,14 @@
 			isa = PBXGroup;
 			children = (
 				8E29CC881F2896710026CC85 /* SimplePlayer */,
-				8E2780271F287E2700013E6C /* AVPlayer */,
 			);
 			path = Player;
-			sourceTree = "<group>";
-		};
-		8E2780271F287E2700013E6C /* AVPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				8E29CC781F2890D60026CC85 /* Player.swift */,
-				8E29CC791F2890D60026CC85 /* PlayerLikeView.swift */,
-				8E29CC7A1F2890D60026CC85 /* Player-API.swift */,
-				8E29CC7B1F2890D60026CC85 /* PlayerTopNavBar.swift */,
-				8E29CC7C1F2890D60026CC85 /* PlayerBottomBar.swift */,
-				8E29CC7D1F2890D60026CC85 /* NetWorkCheck.swift */,
-			);
-			path = AVPlayer;
 			sourceTree = "<group>";
 		};
 		8E29CC881F2896710026CC85 /* SimplePlayer */ = {
 			isa = PBXGroup;
 			children = (
+				8E58F3151F2B2F0D00FF2B0E /* SPPlayer-API.swift */,
 				8E29CC891F2896940026CC85 /* SPPlayer.swift */,
 				8E78722C1F289BFC002710A8 /* SPViewController.swift */,
 				8E0800CA1F29901300A11A9C /* SPPlayer1.swift */,
@@ -309,12 +291,12 @@
 				8E0800D71F299D4E00A11A9C /* Extension-UIImage.swift in Sources */,
 				8E0800D31F29980200A11A9C /* SPBottomBar.swift in Sources */,
 				8E0800D91F29C94B00A11A9C /* SPTopBar.swift in Sources */,
+				8E58F3161F2B2F0D00FF2B0E /* SPPlayer-API.swift in Sources */,
 				8E29CC8B1F289B390026CC85 /* SPPlayer.swift in Sources */,
 				8E2780171F287DC900013E6C /* AYViewController.swift in Sources */,
 				8E2780151F287DC900013E6C /* AppDelegate.swift in Sources */,
 				8E0800CB1F29901300A11A9C /* SPPlayer1.swift in Sources */,
 				8E0800D51F299A2100A11A9C /* Extension-UIColor.swift in Sources */,
-				8E29CC831F2890D60026CC85 /* NetWorkCheck.swift in Sources */,
 				8E0800D01F2996A100A11A9C /* SPPlayer2.swift in Sources */,
 				8E78722D1F289BFC002710A8 /* SPViewController.swift in Sources */,
 				8E0800D11F2996A100A11A9C /* SPViewController2.swift in Sources */,

@@ -28,6 +28,9 @@ class SPViewController: UIViewController {
         self.adjustUI()
         
         player.configure(url: URL.init(string: "https://dn-iyongzai.qbox.me/video/sdyjq7.mp4")!, playImmediately: true)
+        player.setNavTitle("速度与激情7")
+        player.backAction(self.navigationController, action: #selector(UINavigationController.popViewController(animated:)), for: .touchUpInside)
+        self.navigationController?.navigationBar.isHidden = !(UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height)
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,20 +38,11 @@ class SPViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
 
-extension SPViewController: UI {
+
+// MARK: - 实现UI协议方法
+extension SPViewController: UICodingStyle {
     func adjustUI() {
         self.view.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = false
@@ -63,5 +57,15 @@ extension SPViewController: UI {
             make.top.left.right.equalTo(0)
             make.height.equalTo(player.snp.width).dividedBy(16.0/9.0)
         }
+    }
+}
+
+// MARK: - 横纵屏
+extension SPViewController {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        player.viewWillTransition(to: size, with: coordinator)
+        let portrait = size.width == min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
+        self.navigationController?.navigationBar.isHidden = !portrait
     }
 }

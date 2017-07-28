@@ -85,7 +85,7 @@ class SPBottomBar: UIView {
 
 
 // MARK: - 添加子视图
-extension SPBottomBar: UI {
+extension SPBottomBar: UICodingStyle {
     func addSubviews() {
         effectView.addSubview(playedTimeLabel)
         effectView.addSubview(orientationButton)

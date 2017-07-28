@@ -53,7 +53,7 @@ class SPPlayer2: UIView {
     }
 }
 
-extension SPPlayer2: UI {
+extension SPPlayer2: UICodingStyle {
     func addSubviews() {
         self.addSubview(bottomBar)
         self.addSubview(topNavBar)
