@@ -27,7 +27,9 @@ class SPViewController: UIViewController {
         self.addConstraints()
         self.adjustUI()
         
-        player.configure(url: URL.init(string: "https://dn-iyongzai.qbox.me/video/sdyjq7.mp4")!, playImmediately: true)
+        let videoURLString = "https://dn-iyongzai.qbox.me/video/sdyjq7.mp4"
+        let previewURLString = "https://github.com/IOS-Wheeler/Pics/blob/master/VideoPlayer-AVPlayer-pre.jpg?raw=true"
+        player.configure(url: URL.init(string: videoURLString)!, playImmediately: false, preViewURL: URL.init(string: previewURLString)!)
         player.setNavTitle("速度与激情7")
         player.backAction(self.navigationController, action: #selector(UINavigationController.popViewController(animated:)), for: .touchUpInside)
         self.navigationController?.navigationBar.isHidden = !(UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height)

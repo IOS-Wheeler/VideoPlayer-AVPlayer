@@ -15,7 +15,8 @@ protocol PlayerAPI {
     /// - Parameters:
     ///   - url: 视频URL
     ///   - playImmediately: 是否立即播放
-    func configure(url: URL, playImmediately: Bool)
+    ///   - preViewURL: 预览图
+    func configure(url: URL, playImmediately: Bool, preViewURL: URL?)
     
     /// 是否隐藏顶部标题栏
     ///

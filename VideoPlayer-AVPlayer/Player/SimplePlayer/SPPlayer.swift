@@ -8,7 +8,7 @@
 
 import UIKit
 import AVFoundation
-
+import Kingfisher
 
 struct ObserverKey {
     private(set) var rawValue: String
@@ -42,6 +42,13 @@ class SPPlayer: UIView {
         contentOverlayView.backgroundColor = UIColor.clear
         contentOverlayView.isUserInteractionEnabled = true
         return contentOverlayView
+    }()
+    
+    fileprivate lazy var preView: UIImageView = {
+        let preView = UIImageView()
+        preView.layer.masksToBounds = true
+        preView.contentMode = .scaleAspectFill
+        return preView
     }()
     
     /// 底部操作栏
@@ -132,6 +139,7 @@ extension SPPlayer: UICodingStyle {
     }
     func addSubviews() {
         self.addSubview(contentOverlayView)
+        contentOverlayView.addSubview(preView)
         contentOverlayView.addSubview(bottomBar)
         contentOverlayView.addSubview(topNavBar)
         contentOverlayView.addSubview(playButton)
@@ -140,6 +148,9 @@ extension SPPlayer: UICodingStyle {
     func addConstraints() {
         contentOverlayView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
+        }
+        preView.snp.makeConstraints { (make) in
+            make.edges.equalTo(self)
         }
         bottomBar.snp.makeConstraints { (make) in
             make.left.bottom.right.equalTo(0)
@@ -260,6 +271,9 @@ extension SPPlayer {
     @objc fileprivate func playButtonClicked(_ sender: UIButton) {
         let playing = sender.isSelected
         sender.isSelected = !sender.isSelected
+        if !preView.isHidden {
+            preView.isHidden = true
+        }
         if playing {//正在播放
             player.pause()
             UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: { 
@@ -362,7 +376,9 @@ extension SPPlayer {
     /// - Parameters:
     ///   - url: 视频URL
     ///   - playImmediately: 是否立即播放
-    func configure(url: URL, playImmediately: Bool) {
+    ///   - preViewURL: 预览图
+    func configure(url: URL, playImmediately: Bool, preViewURL: URL? = nil) {
+        preView.kf.setImage(with: preViewURL)
         if let currentItem = player.currentItem {
             currentItem.removeObserver(self, forKeyPath: ObserverKey.status.rawValue, context: nil)
             currentItem.removeObserver(self, forKeyPath: ObserverKey.loadedTimeRanges.rawValue, context: nil)
