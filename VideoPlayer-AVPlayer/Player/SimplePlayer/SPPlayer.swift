@@ -76,6 +76,9 @@ class SPPlayer: UIView {
         self.addConstraints()
         self.addEvents()
         self.adjustUI()
+        
+        //静音状态下播放声音
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
     }
     
     required init?(coder aDecoder: NSCoder) {
