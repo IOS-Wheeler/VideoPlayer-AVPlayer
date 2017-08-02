@@ -1168,9 +1168,65 @@ extension SPViewController {
 
 </code></pre>
 
-到此为止，整个Demo的编写全部完成 <br />
+到此为止，整个Demo的编写基本已经完成，不过呢，还有一个收尾工作可做可不做，请看最后一部分 <br />
+## 第四部分：暴露API ##
 
-附上几张效果图：
+
+如果我们要直接使用封装好的播放器SPPlayer，可是有时我们并不想去繁杂的代码文件中寻找暴露的API，所以我们设计的时候，尽量把需要暴露的东西放在一起，比比如说，所有需要暴露的方法全部编写到一个扩展类中，不要设置私有的访问权限就好了。那么需要暴露一些属性给外部用呢，怎么办，可不可以把属性写到扩展中呢？答案是否定的，扩展中是不允许定义储存属性的，但是可以提供计算属性，所以，如果非要在扩展中暴露属性，那么需要提供计算属性，然后再计算属性里面操作对应的的储存属性。这种把需要暴露的属性或者方法归类在一起，通常这个扩展跟定义都在一个文件中，虽然方便了许多，但是要是同事用，或者工作交接，或者别人用你的播放器的时候，其实并不想过多的了解你的内部代码，人家更想知道，你已经暴露出来的API，虽然有一个扩展把这些API暴露出来，但是也是需要找到具体位置，如果写在文件末尾或许还好，要是在中间，人家不一定发现得了，那么怎么解决这个问题呢？我的方案是：新建文件，然后定义一个协议，通过协议定义方法和属性，扩展一个SPPlayer继承协议，但是在该扩展中，不需要编写任何代码。因为我们需要暴露的代码在SPPlayer定义的那个文件中已经有了一个扩展类，在那个扩展类中已经实现了原有的暴露需要，同时它也实现了所以协议的方法和属性。<br />
+上代码：<br />
+<pre><code>
+import UIKit
+
+protocol PlayerAPI {
+    /// 设置视频URL
+    ///
+    /// - Parameters:
+    ///   - url: 视频URL
+    ///   - playImmediately: 是否立即播放
+    func configure(url: URL, playImmediately: Bool)
+    /// 是否隐藏顶部标题栏
+    ///
+    /// - Parameter hidden: 是否隐藏
+    func hiddenTopNavBar(_ hidden: Bool)
+    /// 设置标题
+    ///
+    /// - Parameter title: 标题
+    func setNavTitle(_ title: String?)
+    /// 是否隐藏顶部返回按钮
+    ///
+    /// - Parameter hidden: 是否隐藏
+    func hiddenBackButton(_ hidden: Bool)
+    /// 标题栏返回按钮事件
+    ///
+    /// - Parameters:
+    ///   - target: 响应的target
+    ///   - action: 执行的Selector
+    ///   - controlEvents: 事件类型
+    func backAction(_ target: Any?, action: Selector, for controlEvents: UIControlEvents)
+    /// 是否隐藏底部操作栏
+    ///
+    /// - Parameter hidden: 是否隐藏
+    func hiddenBottomBar(_ hidden: Bool)
+    /// 播放
+    func play()
+    /// 暂停
+    func pause() 
+    /// 横纵屏变化
+    ///
+    /// - Parameters:
+    ///   - size: 即将要变换的size
+    ///   - coordinator: 即将要变化的coordinator
+    func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator)
+}
+
+// MARK: - 通过PlayerProtocol对外提供接口，不暴露内部实现
+extension SPPlayer: PlayerAPI {
+    
+}
+</code></pre>
+
+最后，文章写到这里也就结束了，感谢您的阅览，<br />
+顺便附上三张截图：
 
 ![第一张效果图](https://github.com/IOS-Wheeler/Pics/blob/master/VideoPlayer-AVPlayer-001.jpg?raw=true)
 ![第二张效果图](https://github.com/IOS-Wheeler/Pics/blob/master/VideoPlayer-AVPlayer-002.jpg?raw=true)
