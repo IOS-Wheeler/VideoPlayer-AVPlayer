@@ -17,6 +17,8 @@ class AYViewController: UIViewController {
         return tb
     }()
     
+//    fileprivate var data = [("AVPlayer的简单使用",[("No.1 添加播放器", "SPViewController1"), ("No.2 添加UI", "SPViewController2"), ("No.3 完整版", "SPViewController")]),
+//                            ("仿微信播放器",[("仿微信播放", "WPViewController")])]
     fileprivate var data = [("AVPlayer的简单使用",[("No.1 添加播放器", "SPViewController1"), ("No.2 添加UI", "SPViewController2"), ("No.3 完整版", "SPViewController")])]
 
     override func viewDidLoad() {
@@ -60,6 +62,9 @@ extension AYViewController: UITableViewDelegate {
 }
 
 extension AYViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return data[section].0
+    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return data.count
     }

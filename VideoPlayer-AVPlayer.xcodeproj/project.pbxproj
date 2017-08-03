@@ -29,6 +29,9 @@
 		8E78722D1F289BFC002710A8 /* SPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E78722C1F289BFC002710A8 /* SPViewController.swift */; };
 		8E78722F1F289D5F002710A8 /* AYProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E78722E1F289D5F002710A8 /* AYProtocols.swift */; };
 		8E7872321F28A4F8002710A8 /* Extension-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7872311F28A4F8002710A8 /* Extension-String.swift */; };
+		8EF91B3E1F332ACF00413F6B /* WPPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF91B3D1F332ACF00413F6B /* WPPlayer.swift */; };
+		8EF91B401F332AE800413F6B /* WPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF91B3F1F332AE800413F6B /* WPViewController.swift */; };
+		8EF91B421F33342000413F6B /* WPPlayerControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF91B411F33342000413F6B /* WPPlayerControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +61,9 @@
 		8E78722C1F289BFC002710A8 /* SPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPViewController.swift; sourceTree = "<group>"; };
 		8E78722E1F289D5F002710A8 /* AYProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AYProtocols.swift; sourceTree = "<group>"; };
 		8E7872311F28A4F8002710A8 /* Extension-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension-String.swift"; sourceTree = "<group>"; };
+		8EF91B3D1F332ACF00413F6B /* WPPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WPPlayer.swift; sourceTree = "<group>"; };
+		8EF91B3F1F332AE800413F6B /* WPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WPViewController.swift; sourceTree = "<group>"; };
+		8EF91B411F33342000413F6B /* WPPlayerControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WPPlayerControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +118,7 @@
 		8E2780261F287E2700013E6C /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				8EF91B3A1F332A7700413F6B /* WechatPlayer */,
 				8E29CC881F2896710026CC85 /* SimplePlayer */,
 			);
 			path = Player;
@@ -141,6 +148,16 @@
 				8E0800D61F299D4E00A11A9C /* Extension-UIImage.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		8EF91B3A1F332A7700413F6B /* WechatPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				8EF91B3D1F332ACF00413F6B /* WPPlayer.swift */,
+				8EF91B411F33342000413F6B /* WPPlayerControl.swift */,
+				8EF91B3F1F332AE800413F6B /* WPViewController.swift */,
+			);
+			path = WechatPlayer;
 			sourceTree = "<group>";
 		};
 		A9DF8AA82D4212736C823412 /* Pods */ = {
@@ -290,6 +307,7 @@
 				8E0800CD1F29903700A11A9C /* SPViewController1.swift in Sources */,
 				8E0800D71F299D4E00A11A9C /* Extension-UIImage.swift in Sources */,
 				8E0800D31F29980200A11A9C /* SPBottomBar.swift in Sources */,
+				8EF91B401F332AE800413F6B /* WPViewController.swift in Sources */,
 				8E0800D91F29C94B00A11A9C /* SPTopBar.swift in Sources */,
 				8E58F3161F2B2F0D00FF2B0E /* SPPlayer-API.swift in Sources */,
 				8E29CC8B1F289B390026CC85 /* SPPlayer.swift in Sources */,
@@ -300,6 +318,8 @@
 				8E0800D01F2996A100A11A9C /* SPPlayer2.swift in Sources */,
 				8E78722D1F289BFC002710A8 /* SPViewController.swift in Sources */,
 				8E0800D11F2996A100A11A9C /* SPViewController2.swift in Sources */,
+				8EF91B3E1F332ACF00413F6B /* WPPlayer.swift in Sources */,
+				8EF91B421F33342000413F6B /* WPPlayerControl.swift in Sources */,
 				8E7872321F28A4F8002710A8 /* Extension-String.swift in Sources */,
 				8E78722F1F289D5F002710A8 /* AYProtocols.swift in Sources */,
 			);
