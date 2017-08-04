@@ -44,11 +44,11 @@ class SPPlayer: UIView {
         return contentOverlayView
     }()
     
-    fileprivate lazy var preView: UIImageView = {
-        let preView = UIImageView()
-        preView.layer.masksToBounds = true
-        preView.contentMode = .scaleAspectFill
-        return preView
+    fileprivate lazy var preview: UIImageView = {
+        let preview = UIImageView()
+        preview.layer.masksToBounds = true
+        preview.contentMode = .scaleAspectFill
+        return preview
     }()
     
     /// 底部操作栏
@@ -74,6 +74,39 @@ class SPPlayer: UIView {
     }()
     
     fileprivate var link: CADisplayLink?
+    
+    
+    /// 是否隐藏所有交互UI
+    fileprivate var enableControl = true {
+        didSet {
+            contentOverlayView.isHidden = !enableControl
+            switch enableControl {
+            case true:
+                link?.invalidate()
+                self.link = nil
+                link = CADisplayLink.init(target: WeakProxy.init(self), selector: #selector(updateTime))
+                link?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
+                
+                if selfTapGesRec == nil {
+                    let tap = UITapGestureRecognizer.init(target: self, action: #selector(hiddenContentOverlayView))
+                    self.addGestureRecognizer(tap)
+                    self.isUserInteractionEnabled = true
+                    self.selfTapGesRec = tap
+                }
+                
+            case false:
+                link?.invalidate()
+                self.link = nil
+                
+                if selfTapGesRec != nil {
+                    self.removeGestureRecognizer(selfTapGesRec!)
+                }
+            }
+        }
+    }
+    
+    fileprivate weak var selfTapGesRec: UITapGestureRecognizer?
+    fileprivate var updatingClosure: ((_ currentTime: TimeInterval, _ duration: TimeInterval, _ status: AVPlayerItemStatus)->Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -138,8 +171,8 @@ extension SPPlayer: UICodingStyle {
         bottomBar.orientationButton.isSelected = !(UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height)
     }
     func addSubviews() {
+        self.addSubview(preview)
         self.addSubview(contentOverlayView)
-        contentOverlayView.addSubview(preView)
         contentOverlayView.addSubview(bottomBar)
         contentOverlayView.addSubview(topNavBar)
         contentOverlayView.addSubview(playButton)
@@ -149,8 +182,8 @@ extension SPPlayer: UICodingStyle {
         contentOverlayView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
-        preView.snp.makeConstraints { (make) in
-            make.edges.equalTo(self)
+        preview.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
         }
         bottomBar.snp.makeConstraints { (make) in
             make.left.bottom.right.equalTo(0)
@@ -176,6 +209,7 @@ extension SPPlayer: UICodingStyle {
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(hiddenContentOverlayView))
         self.addGestureRecognizer(tap)
         self.isUserInteractionEnabled = true
+        self.selfTapGesRec = tap
         
         //slider几个需要监听的事件
         bottomBar.slider.addTarget(self, action: #selector(sliderTouchDown(_:)), for: .touchDown)
@@ -246,18 +280,29 @@ extension SPPlayer {
 // MARK: - Actions
 extension SPPlayer {
     @objc fileprivate func updateTime() {
+        guard enableControl || updatingClosure != nil else {
+            return
+        }
         // 当前播放时间
         let currentTime = TimeInterval(CMTimeGetSeconds(player.currentTime()))
         // 视频总时长(解释：timescale: 压缩比例)
         let totalTime   = TimeInterval(player.currentItem?.duration.value ?? 0)  / TimeInterval(player.currentItem?.duration.timescale ?? 1)
-        // 更新UI
-        bottomBar.playedTimeLabel.text = formatPlayTime(secounds: currentTime)
-        bottomBar.totalTimeLabel.text = formatPlayTime(secounds: totalTime)
         
-        //播放进度
-        if !bottomBar.sliding {
-            bottomBar.slider.setValue(Float(currentTime/totalTime), animated: true)
+        if enableControl {
+            // 更新UI
+            bottomBar.playedTimeLabel.text = formatPlayTime(secounds: currentTime)
+            bottomBar.totalTimeLabel.text = formatPlayTime(secounds: totalTime)
+            
+            //播放进度
+            if !bottomBar.sliding {
+                bottomBar.slider.setValue(Float(currentTime/totalTime), animated: true)
+            }
         }
+        if updatingClosure != nil {
+            updatingClosure!(currentTime, totalTime, player.currentItem?.status ?? .unknown)
+        }
+        
+        
     }
     fileprivate func formatPlayTime(secounds: TimeInterval) -> String{
         if secounds.isNaN{
@@ -271,8 +316,8 @@ extension SPPlayer {
     @objc fileprivate func playButtonClicked(_ sender: UIButton) {
         let playing = sender.isSelected
         sender.isSelected = !sender.isSelected
-        if !preView.isHidden {
-            preView.isHidden = true
+        if !preview.isHidden {
+            preview.isHidden = true
         }
         if playing {//正在播放
             player.pause()
@@ -377,8 +422,8 @@ extension SPPlayer {
     ///   - url: 视频URL
     ///   - playImmediately: 是否立即播放
     ///   - preViewURL: 预览图
-    func configure(url: URL, playImmediately: Bool, preViewURL: URL? = nil) {
-        preView.kf.setImage(with: preViewURL)
+    func configure(url: URL, playImmediately: Bool, previewURL: URL? = nil) {
+        preview.kf.setImage(with: previewURL)
         if let currentItem = player.currentItem {
             currentItem.removeObserver(self, forKeyPath: ObserverKey.status.rawValue, context: nil)
             currentItem.removeObserver(self, forKeyPath: ObserverKey.loadedTimeRanges.rawValue, context: nil)
@@ -430,6 +475,30 @@ extension SPPlayer {
     }
     
     
+    /// 是否隐藏播放按钮
+    ///
+    /// - Parameter hidden: 是否隐藏
+    func hiddenPlayButton(_ hidden: Bool){
+        playButton.isHidden = hidden
+    }
+
+    /// 是否隐藏所有的交互UI
+    func hiddenAllControl(_ hidden: Bool) {
+        enableControl = !hidden
+    }
+    
+    
+    /// 实时监听更新UI
+    ///
+    /// - Parameter handle:执行的代码
+    func updating(_ handle: ((_ currentTime: TimeInterval, _ duration: TimeInterval, _ status: AVPlayerItemStatus)->Void)?) {
+        self.updatingClosure = handle
+        
+        link?.invalidate()
+        self.link = nil
+        link = CADisplayLink.init(target: WeakProxy.init(self), selector: #selector(updateTime))
+        link?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
+    }
     
     /// 播放
     func play() {

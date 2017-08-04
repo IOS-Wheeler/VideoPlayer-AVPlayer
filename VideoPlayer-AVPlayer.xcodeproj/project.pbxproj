@@ -31,7 +31,6 @@
 		8E7872321F28A4F8002710A8 /* Extension-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7872311F28A4F8002710A8 /* Extension-String.swift */; };
 		8EF91B3E1F332ACF00413F6B /* WPPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF91B3D1F332ACF00413F6B /* WPPlayer.swift */; };
 		8EF91B401F332AE800413F6B /* WPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF91B3F1F332AE800413F6B /* WPViewController.swift */; };
-		8EF91B421F33342000413F6B /* WPPlayerControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF91B411F33342000413F6B /* WPPlayerControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,7 +62,6 @@
 		8E7872311F28A4F8002710A8 /* Extension-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension-String.swift"; sourceTree = "<group>"; };
 		8EF91B3D1F332ACF00413F6B /* WPPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WPPlayer.swift; sourceTree = "<group>"; };
 		8EF91B3F1F332AE800413F6B /* WPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WPViewController.swift; sourceTree = "<group>"; };
-		8EF91B411F33342000413F6B /* WPPlayerControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WPPlayerControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				8EF91B3D1F332ACF00413F6B /* WPPlayer.swift */,
-				8EF91B411F33342000413F6B /* WPPlayerControl.swift */,
 				8EF91B3F1F332AE800413F6B /* WPViewController.swift */,
 			);
 			path = WechatPlayer;
@@ -319,7 +316,6 @@
 				8E78722D1F289BFC002710A8 /* SPViewController.swift in Sources */,
 				8E0800D11F2996A100A11A9C /* SPViewController2.swift in Sources */,
 				8EF91B3E1F332ACF00413F6B /* WPPlayer.swift in Sources */,
-				8EF91B421F33342000413F6B /* WPPlayerControl.swift in Sources */,
 				8E7872321F28A4F8002710A8 /* Extension-String.swift in Sources */,
 				8E78722F1F289D5F002710A8 /* AYProtocols.swift in Sources */,
 			);

@@ -13,7 +13,7 @@ import AVFoundation
 class WPViewController: UIViewController {
     
     fileprivate lazy var player: WPPlayer = WPPlayer()
-    fileprivate lazy var playerControl: WPPlayerControl = WPPlayerControl.init(frame: CGRect.zero)
+    //fileprivate lazy var playerControl: WPPlayerControl = WPPlayerControl.init(frame: CGRect.zero)
     
     
     
@@ -26,9 +26,14 @@ class WPViewController: UIViewController {
         
         self.addSubviews()
         self.addConstraints()
+        self.addEvents()
         self.adjustUI()
         
-        player.configure(url: URL.init(string: "https://dn-iyongzai.qbox.me/video/sdyjq7.mp4")!, playImmediately: true)
+        let videoURLString = "https://dn-iyongzai.qbox.me/video/sdyjq7.mp4"
+        let previewURLString = "https://github.com/IOS-Wheeler/Pics/blob/master/VideoPlayer-AVPlayer-pre.jpg?raw=true"
+        player.configure(url: URL.init(string: videoURLString)!, playImmediately: false, previewURL: URL.init(string: previewURLString)!)
+        //player.backAction(self.navigationController, action: #selector(UINavigationController.popViewController(animated:)), for: .touchUpInside)
+        self.navigationController?.navigationBar.isHidden = !(UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height)
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,7 +59,6 @@ extension WPViewController: UICodingStyle {
         self.view.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = false
         
-        self.navigationItem.title = "No.1 添加播放器"
     }
     func addSubviews() {
         self.view.addSubview(player)
@@ -63,6 +67,31 @@ extension WPViewController: UICodingStyle {
         player.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(0)
             make.height.equalTo(player.snp.width).dividedBy(16.0/9.0)
+        }
+    }
+    func addEvents() {
+        player.setPlayAction {
+            DispatchQueue.main.async(execute: {
+                self.navigationController?.view.addSubview(self.player)
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.player.snp.remakeConstraints({ (make) in
+                        make.edges.equalTo(UIEdgeInsets.zero)
+                    })
+                    self.player.layoutIfNeeded()
+                }, completion: { (finished: Bool) in
+                    
+                })
+            })
+        }
+        
+        player.setCloseAction {
+            DispatchQueue.main.async(execute: { 
+                self.view.addSubview(self.player)
+                self.player.snp.makeConstraints { (make) in
+                    make.top.left.right.equalTo(0)
+                    make.height.equalTo(self.player.snp.width).dividedBy(16.0/9.0)
+                }
+            })
         }
     }
 }

@@ -15,8 +15,8 @@ protocol PlayerAPI {
     /// - Parameters:
     ///   - url: 视频URL
     ///   - playImmediately: 是否立即播放
-    ///   - preViewURL: 预览图
-    func configure(url: URL, playImmediately: Bool, preViewURL: URL?)
+    ///   - previewURL: 预览图
+    func configure(url: URL, playImmediately: Bool, previewURL: URL?)
     
     /// 是否隐藏顶部标题栏
     ///
@@ -46,6 +46,16 @@ protocol PlayerAPI {
     ///
     /// - Parameter hidden: 是否隐藏
     func hiddenBottomBar(_ hidden: Bool)
+    
+    
+    /// 是否隐藏播放按钮
+    ///
+    /// - Parameter hidden: 是否隐藏
+    func hiddenPlayButton(_ hidden: Bool)
+    
+    
+    /// 是否隐藏所有的交互UI
+    func hiddenAllControl(_ hidden: Bool)
     
     
     /// 播放
