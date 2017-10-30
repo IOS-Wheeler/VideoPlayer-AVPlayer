@@ -76,7 +76,7 @@ extension String {
             let startIndex = self.index(self.startIndex, offsetBy: r.lowerBound)
             let endIndex = self.index(self.startIndex, offsetBy: r.upperBound)
             
-            return self[startIndex..<endIndex]
+            return String(self[startIndex..<endIndex])
         }
     }
 }

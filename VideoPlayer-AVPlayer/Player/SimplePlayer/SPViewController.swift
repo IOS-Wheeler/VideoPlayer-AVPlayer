@@ -55,9 +55,16 @@ extension SPViewController: UICodingStyle {
         self.view.addSubview(player)
     }
     func addConstraints() {
-        player.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(0)
-            make.height.equalTo(player.snp.width).dividedBy(16.0/9.0)
+        let portrait =  UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height
+        if (UIScreen.main.bounds.size.width==812 || UIScreen.main.bounds.size.height==812), !portrait {
+            player.snp.makeConstraints { (make) in
+                make.edges.equalTo(self.view)
+            }
+        }else{
+            player.snp.makeConstraints { (make) in
+                make.top.left.right.equalTo(self.view)
+                make.height.equalTo(player.snp.width).dividedBy(16.0/9.0)
+            }
         }
     }
 }
@@ -69,5 +76,22 @@ extension SPViewController {
         player.viewWillTransition(to: size, with: coordinator)
         let portrait = size.width == min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
         self.navigationController?.navigationBar.isHidden = !portrait
+        
+        if UIScreen.main.bounds.size.width==812 || UIScreen.main.bounds.size.height==812 {
+            if portrait {
+                player.snp.remakeConstraints({ (make) in
+                    make.top.left.right.equalTo(self.view)
+                    make.height.equalTo(player.snp.width).dividedBy(16.0/9.0)
+                })
+            }else{
+                player.snp.remakeConstraints({ (make) in
+                    make.top.bottom.equalTo(self.view)
+                    if #available(iOS 11.0, *) {
+                        make.left.equalTo(self.view.safeAreaInsets.left)
+                        make.right.equalTo(-self.view.safeAreaInsets.right)
+                    }
+                })
+            }
+        }
     }
 }

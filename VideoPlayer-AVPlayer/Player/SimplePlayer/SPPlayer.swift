@@ -30,7 +30,7 @@ class SPPlayer: UIView {
     fileprivate(set) lazy var player = AVPlayer.init()
     fileprivate lazy var playerLayer: AVPlayerLayer = {
         let layer = AVPlayerLayer.init(player: self.player)
-        layer.videoGravity = AVLayerVideoGravityResizeAspect
+        layer.videoGravity = AVLayerVideoGravity.resizeAspect
         layer.contentsScale = UIScreen.main.scale
         return layer
     }()
@@ -402,7 +402,7 @@ extension SPPlayer {
     /// 横纵屏切换
     ///
     /// - Parameter sender: 切换按钮
-    func orientationButtonClicked(_ sender: UIButton) {
+    @objc func orientationButtonClicked(_ sender: UIButton) {
         if sender.isSelected {//需要退出全屏
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
         }else{//需要全屏

@@ -16,7 +16,7 @@ class SPPlayer1: UIView {
     fileprivate lazy var player = AVPlayer.init()
     fileprivate lazy var playerLayer: AVPlayerLayer = {
         let layer = AVPlayerLayer.init(player: self.player)
-        layer.videoGravity = AVLayerVideoGravityResizeAspect
+        layer.videoGravity = AVLayerVideoGravity.resizeAspect
         layer.contentsScale = UIScreen.main.scale
         
         return layer
