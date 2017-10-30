@@ -87,11 +87,11 @@ class SPBottomBar: UIView {
 // MARK: - 添加子视图
 extension SPBottomBar: UICodingStyle {
     func addSubviews() {
-        effectView.addSubview(playedTimeLabel)
-        effectView.addSubview(orientationButton)
-        effectView.addSubview(totalTimeLabel)
-        effectView.addSubview(progress)
-        effectView.addSubview(slider)
+        effectView.contentView.addSubview(playedTimeLabel)
+        effectView.contentView.addSubview(orientationButton)
+        effectView.contentView.addSubview(totalTimeLabel)
+        effectView.contentView.addSubview(progress)
+        effectView.contentView.addSubview(slider)
         
         self.addSubview(effectView)
     }

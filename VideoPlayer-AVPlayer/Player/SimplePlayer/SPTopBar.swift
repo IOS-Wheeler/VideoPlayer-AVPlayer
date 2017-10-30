@@ -52,8 +52,8 @@ class SPTopBar: UIView {
 // MARK: - 添加子视图
 extension SPTopBar: UICodingStyle {
     func addSubviews() {
-        effectView.addSubview(backButton)
-        effectView.addSubview(titleLabel)
+        effectView.contentView.addSubview(backButton)
+        effectView.contentView.addSubview(titleLabel)
         
         self.addSubview(effectView)
     }
